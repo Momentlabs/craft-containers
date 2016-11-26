@@ -18,7 +18,7 @@ fi
 chown -R bungeecord.bungeecord /$BUNGEECORD_HOME/
 
 cd /$BUNGEECORD_HOME/
-echo "`date --rfc-3339=seconds`:[INFO] Starging BungeeCord server."
+echo "`date --rfc-3339=seconds`:[INFO] Starting BungeeCord server."
 su - bungeecord -c 'java -Xms512M -Xmx1536M -jar BungeeCord.jar'
 
 # 

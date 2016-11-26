@@ -1,4 +1,5 @@
-FROM 033441544097.dkr.ecr.us-east-1.amazonaws.com/minecraft-no-tools
+FROM 033441544097.dkr.ecr.us-east-1.amazonaws.com/craft-base
+
 
 MAINTAINER David Rivas david@momentlabs.io
 

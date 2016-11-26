@@ -1,4 +1,4 @@
-repo := minecraft-ecs
+repo := craft-controller
 
 # AWS configuration
 aws_repo := 033441544097.dkr.ecr.us-east-1.amazonaws.com

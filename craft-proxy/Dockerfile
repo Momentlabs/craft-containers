@@ -1,4 +1,4 @@
-FROM 033441544097.dkr.ecr.us-east-1.amazonaws.com/minecraft-ecs
+FROM 033441544097.dkr.ecr.us-east-1.amazonaws.com/craft-controller
 
 MAINTAINER David Rivas david@momentlabs.io
 

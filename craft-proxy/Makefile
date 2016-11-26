@@ -1,4 +1,4 @@
-repo := bungee-ecs
+repo := craft-proxy
 
 # AWS Config
 aws_repo := 033441544097.dkr.ecr.us-east-1.amazonaws.com

@@ -1,12 +1,14 @@
 version: '2'
 services:
   minecraft:
-    image: minecraft-ecs
-    container_name: minecraft
+    image: craft-server
+    container_name: minecraft-server
     ports: 
       - 25566:25565
       - 25575:25575
     environment:
+      - SERVER_USER=testuser
+      - SERVER_NAME=test_server
       - TYPE=spigot
       - EULA=true
       - ENABLE_RCON=true
@@ -28,7 +30,7 @@ services:
     stdin_open: true
 
   backup:
-    image: minecraft-ecs
+    image: craft-controller
     container_name: minecraft-controller
     depends_on: 
       - minecraft
@@ -38,7 +40,7 @@ services:
       - minecraft
     environment:
       - SERVER_USER=testuser
-      - SERVER_NAME=docker-machine-laptop-test
+      - SERVER_NAME=test_server
       - ARCHIVE_BUCKET=craft-config-test
       - AWS_REGION=us-east-1
     entrypoint:

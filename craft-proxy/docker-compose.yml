@@ -1,43 +1,33 @@
 version: '2'
 services:
-  bungee:
-    # image: bungee-ecs
-    image: 033441544097.dkr.ecr.us-east-1.amazonaws.com/bungee-ecs
-    container_name: bungee
+  craft-proxy:
+    image: craft-proxy
+    container_name: minecraft-proxy
     ports: 
       - 25577:25577
     links: 
-      - minecraft
-
-  minecraft:
-    # image: minecraft-ecs
-    image: 033441544097.dkr.ecr.us-east-1.amazonaws.com/minecraft-ecs
-    container_name: minecraft-hub
-    ports: 
-      - 25565:25565
-      - 25575:25575
+      - minecraft-01
     environment:
+      - SERVER_NAME=testproxy-01
+      - SERVER_USER=proxy_01
       - EULA=true
-      - TYPE=SPIGOT
       - ENABLE_RCON=true
       - RCON_PASSWORD=testing
       - RCON_PORT=25575
       - ENABLE_QUERY=true
       - QUERY_PORT=25565
-      - MODE=creative
-      - FORCE_GAMEMODE=true
       - MOTD="Vanilla test server in a docker container."
-      - ONLINE_MODE=false
-      - OPS=jdrivas
 
   minecraft-01:
     # image: minecraft-ecs
-    image: 033441544097.dkr.ecr.us-east-1.amazonaws.com/minecraft-ecs
-    container_name: minecraft-01
+    image: 033441544097.dkr.ecr.us-east-1.amazonaws.com/craft-server
+    container_name: minecraft-hub
     ports: 
-      - 35566:25565
-      # - 25575:25575
+      - 25565:25565
+      - 25575:25575
     environment:
+      - SERVER_NAME=hub
+      - SERVER_USER=proxy
       - EULA=true
       - TYPE=SPIGOT
       - ENABLE_RCON=true
@@ -53,12 +43,14 @@ services:
 
   minecraft-02:
     # image: minecraft-ecs
-    image: 033441544097.dkr.ecr.us-east-1.amazonaws.com/minecraft-ecs
+    image: 033441544097.dkr.ecr.us-east-1.amazonaws.com/craft-server
     container_name: minecraft-02
     ports: 
-      - 35567:25565
+      - 35566:25565
       # - 25575:25575
     environment:
+      - SERVER_USER=testuser-02
+      - SERVER_NAME=testserver-02
       - EULA=true
       - TYPE=SPIGOT
       - ENABLE_RCON=true
@@ -71,3 +63,5 @@ services:
       - MOTD="Vanilla test server in a docker container."
       - ONLINE_MODE=false
       - OPS=jdrivas
+
+
