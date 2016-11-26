@@ -1,0 +1,13 @@
+# Rcon:
+  # If you want to disable RCON listener
+  # Enabled: true
+  # Port you want RCON to listen
+  # Port: 39999
+  # Password you want to authenticate connection with
+  # Password: 12fsdaf5s4f5asdf3456
+  # This can be used if you want RCON response to be (not) colored
+  # Colored: true
+Rcon_Enabled: true
+Rcon_Port: 25575
+Rcon_Password: testing
+Rcon_Colored: false

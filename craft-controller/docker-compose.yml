@@ -1,0 +1,58 @@
+version: '2'
+services:
+  minecraft:
+    image: minecraft-ecs
+    container_name: minecraft
+    ports: 
+      - 25566:25565
+      - 25575:25575
+    environment:
+      - TYPE=spigot
+      - EULA=true
+      - ENABLE_RCON=true
+      - RCON_PASSWORD=testing
+      - RCON_PORT=25575
+      - ENABLE_QUERY=true
+      - QUERY_PORT=25565
+      - MODE=creative
+      - FORCE_GAMEMODE=true
+      - MOTD="Spigot test server in a docker container."
+      - ONLINE_MODE=false
+
+    volumes:
+      - /data
+      # - /data:/data
+      # - /opt/configuration:/opt/configuration
+
+    tty: true
+    stdin_open: true
+
+  backup:
+    image: minecraft-ecs
+    container_name: minecraft-controller
+    depends_on: 
+      - minecraft
+    volumes_from:
+      - minecraft
+    links:
+      - minecraft
+    environment:
+      - SERVER_USER=testuser
+      - SERVER_NAME=docker-machine-laptop-test
+      - ARCHIVE_BUCKET=craft-config-test
+      - AWS_REGION=us-east-1
+    entrypoint:
+      - craft-config 
+      - --debug
+      - --log-format=json
+      # - --aws-config=/opt/configuration/credentials
+      - archive
+      - --continuous
+      - --server-ip=minecraft
+      - --rcon-port=25575
+      # - testuser
+      # - DockerMachine-Test
+
+
+
+

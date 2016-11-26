@@ -1,0 +1,42 @@
+Configuration:
+    name: Default
+    status: WARN
+    packages: com.mojang.util
+
+    Appenders:
+        Console:
+            name: WINDOWS_COMPAT
+            target: SYSTEM_OUT
+            Queue: 
+                name: TerminalConsole
+                PatternLayout: 
+                    pattern: "[%d{HH:mm:ss} %level] [CRAFT/%{sys:SERVER_USER}/%{sys:SERVER_NAME}] %msg%"n
+        RollingRandomAccessFile:
+            name: File
+            fileName: logs/lateset.log
+            filePattern: logs/%d{yyyy-MM-dd}-%i.log.gz
+            PatternLayout:
+                pattern: "[%d{HH:mm:ss}] [%t/%level]: Craft Server Log: %msg%n"
+            Policies:
+                TimeBaseTriggerPolicy:
+                OnStartupTriggerPolicy:
+            DefaultRolloverStrategy:
+                max: 1000
+    Loggers:
+        Root:
+            level: info
+            Filters: 
+                MarkerFilter:
+                    marker: NETWORK_PACKETS
+                    onMatch: DENY
+                    onMismatch: NEUTRAL
+            AppenderRef:
+                ref: WINDOWS_COMPAT
+                level: info
+            AppenderRef:
+                ref: File
+            AppenderRef:
+                ref: TerminalConsole
+                level: info
+
+

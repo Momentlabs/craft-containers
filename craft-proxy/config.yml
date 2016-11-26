@@ -1,0 +1,51 @@
+listeners:
+- max_players: 20
+  host: 0.0.0.0:25577
+  force_default_server: true
+  # forced_hosts:
+  motd: 'Docker Bungee'
+  fallback_server: hub
+  default_server: hub
+  tab_list: GLOBAL
+  tab_size: 20
+  query_enabled: true
+  query_port: 25577
+
+servers:
+  hub:
+    address: minecraft-hub:25565
+    restricted: false
+  # one:
+  #   address: minecraft-01:25565
+  #   restricted: false
+  # two:
+  #   address: minecraft-02:25565
+  #   restricted: false
+  #   address: 127.0.0.1:25568
+  #   restricted: false
+  # sga:
+  #   address: 127.0.0.1:25569
+  # restricted: false
+stats: 79564999-f458-464e-b038-f0d966362355
+permissions:
+  default:
+  - bungeecord.command.server
+  - bungeecord.command.list
+  admin:
+  - bungeecord.command.alert
+  - bungeecord.command.end
+  - bungeecord.command.ip
+  - bungeecord.command.reload
+  - servermanager.use
+  - bfix.admin
+groups:
+  jdrivas:
+    - admin
+# General Settings.
+ip_forward: true
+tab_list: GLOBAL_PING
+player_limit: -1
+online_mode: true
+connection_throttle: -1
+timeout: 30000
+log_commands: true
