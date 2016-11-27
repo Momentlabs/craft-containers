@@ -23,8 +23,9 @@ WORKDIR /data
 
 ENTRYPOINT [ "/start" ]
 
+# JVM_OPTS="-Xmx1024M -Xms1024M -Dlog4j.configurationFile=log4j2.xml" \
 ENV UID=1000 GID=1000 \
     MOTD="A Minecraft Server Powered by Docker" \
-    JVM_OPTS="-Xmx1024M -Xms1024M -Dlog4j.configurationFile=log4j2.xml" \
+    JVM_OPTS="-Xmx1024M -Xms1024M" \
     TYPE=VANILLA VERSION=LATEST FORGEVERSION=RECOMMENDED LEVEL=world PVP=false DIFFICULTY=easy \
     LEVEL_TYPE=DEFAULT GENERATOR_SETTINGS= WORLD= MODPACK= ONLINE_MODE=TRUE

@@ -1,9 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "`date --rfc-3339=seconds` [INFO] CRAFT SERVER START UP."
+function log {
+  local mesg=$1
+  local now=`date --rfc-3339=seconds`
+  echo \{ \"serviceName\": \"craft-server\", \"operation\": \"startup\", \"logTime\": \"$now\", \"userName\": \"${SERVER_USER}\", \"serverName\": \"${SERVER_NAME}\", \"cluster\": \"${CLUSTER_NAME}\", \"serverType\": \"${TYPE}\", \"msg\": \"$mesg\" \}
+}
 
-set -e
-`usermod --uid $UID minecraft`
+# echo "{\"log_time\":\"`date --rfc-3339=seconds`\", \"level\":\"INFO\", \"msg\":\"CRAFT SERVER START UP\"}"
+log "CRAFT SERVER STARTING UP"
+
+usermod --uid $UID minecraft
 groupmod --gid $GID minecraft
 
 chown -R minecraft:minecraft /data /start-minecraft /home/minecraft
@@ -17,7 +23,7 @@ done
 mkdir -p /home/minecraft
 chown minecraft: /home/minecraft
 
-echo "`date --rfc-3339=seconds` [INFO] USER = ${SERVER_USER} { \"userName\": \"${SERVER_USER}\" }"
-echo "`date --rfc-3339=seconds` [INFO] SERVER = ${SERVER_NAME} { \"serverName\": \"${SERVER_NAME}\" }"
-echo "`date --rfc-3339=seconds` [INFO] Switching to user 'minecraft' and starting."
+# echo "`date --rfc-3339=seconds` [INFO] Switching to user 'minecraft' and starting."
+# echo "{\"log_time\":\"`date --rfc-3339=seconds`\", \"userName\":\"${SERVER_USER}\", \"serverName\":\"${SERVER_NAME}\"}"
+
 exec sudo -E -u minecraft /start-minecraft "$@"
