@@ -5,7 +5,7 @@
         <Queue name="TerminalConsole">
             <PatternLayout>
                  <pattern> 
-                    { "time_log4j": "%d{MMMM dd YYYY, HH:mm:ss.SSS}", "level": "%level", "userName": "$${env:SERVER_USER}", "serverName": "$${env:SERVER_NAME}", "cluster": "$${env:CLUSTER_NAME}", "serviceName": "craft-server", "msg": "%replace{%m}{\"}{\\"}" } %n
+                    { "time_log4j": "%d{MMMM dd YYYY, HH:mm:ss.SSS}", "level": "%level", "userName": "$${env:SERVER_USER}", "serverName": "$${env:SERVER_NAME}", "serverType": $${env:TYPE}", cluster": "$${env:CLUSTER_NAME}", "serviceName": "craft-server", "serverJAR": "$${env:SERVER}", "msg": "%replace{%m}{\"}{\\"}" } %n
                 </pattern>
              </PatternLayout>
         </Queue>

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 function log {
-  local mesg=$1
+  # Replace any double quotes in the message.
+  local mesg=`tr '"' "\"" <<<$1`
   local now=`date --rfc-3339=seconds`
   echo \{ \"serviceName\": \"craft-server\", \"operation\": \"startup\", \"file\": \"start-minecraft.sh\", \"logTime\": \"$now\", \"userName\": \"${SERVER_USER}\", \"serverName\": \"${SERVER_NAME}\", \"cluster\": \"${CLUSTER_NAME}\", \"serverType\": \"${TYPE}\", \"msg\": \"$mesg\" \}
 }
@@ -251,8 +252,10 @@ case "$TYPE" in
 
 esac
 
-# echo "`date --rfc-3339=seconds` [INFO] Using $TYPE"
-log "Using $TYPE"
+
+log "Using server type: $TYPE, with jar file: \\\"$SERVER.\\\""
+# Make this available for environment.
+export SERVER
 
 # If supplied with a URL for a world, download it and unpack
 if [[ "$WORLD" ]]; then
@@ -498,7 +501,7 @@ done
 if [ "$TYPE" = "SPIGOT" ]; then
   if [ -d /plugins ]; then
     # echo `date --rfc-3339=seconds` [INFO] Copying any Bukkit plugins over
-    log Copying any Bukkit plugins over.
+    log "Copying any Bukkit plugins over."
     cp -r /plugins /data
   fi
 fi
@@ -521,6 +524,6 @@ then
     exec java $JVM_OPTS -jar $SERVER "$@" < /data/bootstrap.txt
 else
     # echo "`date --rfc-3339=seconds` [INFO] Starting server: java $JVM_OPTS -jar $SERVER $@"
-    log "Starting server: java $JVM_OPTS $SERVER $@"
+    log "Starting server: java $JVM_OPTS -jar $SERVER $@"
     exec java $JVM_OPTS -jar $SERVER "$@"
 fi

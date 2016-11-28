@@ -10,6 +10,7 @@ minecraft-server:
   # volumes:
     # - /Users/jdr/Dropbox (Personal)/Development/docker/containers/dockerfiles/minecraft-server/data:/data
   environment:
+    - CLUSTER_NAME="Local_Laptop"
     - EULA=true
     - TYPE=SPIGOT
     - ENABLE_RCON=true
