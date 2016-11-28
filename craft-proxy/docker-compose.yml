@@ -19,7 +19,7 @@ services:
       - MOTD="Vanilla test server in a docker container."
 
   minecraft-01:
-    # image: minecraft-ecs
+    # image: craft-server
     image: 033441544097.dkr.ecr.us-east-1.amazonaws.com/craft-server
     container_name: minecraft-hub
     ports: 
@@ -42,7 +42,7 @@ services:
       - OPS=jdrivas
 
   minecraft-02:
-    # image: minecraft-ecs
+    # image: craft-server
     image: 033441544097.dkr.ecr.us-east-1.amazonaws.com/craft-server
     container_name: minecraft-02
     ports: 

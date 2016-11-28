@@ -9,7 +9,7 @@ RUN useradd -s /bin/bash -d /${BUNGEECORD_HOME} -m bungeecord
 # TODO: Update the script to look pull the latest bungee cord down.
 # Or update the makefile to at least go get the latet OR BOTH.
 RUN if [ ! -d ${BUNGEECORD_HOME} ]; then mkdir ${BUNGEECORD_HOME}/plugins;  fi
-ADD BungeeCord.jar ${BUNGEECORD_HOME}/BungeeCord.jar
+# ADD BungeeCord.jar ${BUNGEECORD_HOME}/BungeeCord.jar
 
 # Plugins. Right now this will be by hand, later perhaps some ENV/Directory thing.
 # ADD plugins/BungeeServerManager.jar ${BUNGEECORD_HOME}/plugins/BugeeServerManager.jar
